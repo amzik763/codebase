@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     viewModel.showString()
+                    viewModel.runAPI()
                     Greeting("Android")
                 }
             }
