@@ -12,7 +12,7 @@ sealed class Resource<out T> {
         val errorBody: ResponseBody?
     ) : Resource<Nothing>()
 
-    object Noaction: Resource<Nothing>()
+    object NoAction: Resource<Nothing>()
 
     object Loading : Resource<Nothing>()
 
