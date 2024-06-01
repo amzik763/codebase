@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.amzi.codebase.retrofit.response.loginResponse
+import com.amzi.codebase.utility.handleApiError
 import com.amzi.codebase.viewmodels.myViewModel
 import com.tillagewireless.ss.data.network.Resource
 
@@ -79,6 +80,7 @@ fun LoginScreen(
             Text("Login Successful: ${(loginResponse as Resource.Success<loginResponse>).value}")
         }
         is Resource.Failure -> {
+            handleApiError(loginResponse as Resource.Failure)
             Text("Login Failed: ${(loginResponse as Resource.Failure).errorBody}")
         }
     }
