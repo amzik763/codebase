@@ -20,7 +20,6 @@ class myViewModel @Inject constructor(private val repository: myRepository): Vie
     private val _loginResponse = MutableStateFlow<Resource<loginResponse>>(Resource.NoAction)
     val loginResponse: StateFlow<Resource<loginResponse>> = _loginResponse
 
-
     private val _registerResponse = MutableStateFlow<Resource<registerResponse>>(Resource.NoAction)
     val registerResponse: StateFlow<Resource<registerResponse>> = _registerResponse
 

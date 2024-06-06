@@ -7,14 +7,10 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface authAPIs {
-
     @FormUrlEncoded
     @POST("/starter_operator/login")
     suspend fun login(
         @Field("mobile_no") mobile_no:String,
         @Field("password") password:String
     ): loginResponse
-
-
-
 }

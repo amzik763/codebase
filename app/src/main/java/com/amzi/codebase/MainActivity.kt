@@ -20,8 +20,7 @@ import com.amzi.codebase.utility.REQUEST_WRITE_STORAGE
 import com.amzi.codebase.viewmodels.myViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
-import androidx.core.content.FileProvider
-import java.io.File
+import com.amzi.codebase.utility.FilePickerHandler
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +31,8 @@ class MainActivity : ComponentActivity() {
     //or
 //  @Inject
 //  lateinit var viewModel2: myViewModel
+
+    @Inject lateinit var filePickerHandler: FilePickerHandler
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     viewModel.showString()
 //                    Greeting("Android")
-                    LoginScreen(viewmodel = viewModel)
+                    LoginScreen(viewmodel = viewModel, filePickerHandler)
                 }
             }
         }

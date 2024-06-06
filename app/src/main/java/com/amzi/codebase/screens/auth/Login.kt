@@ -26,19 +26,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.core.content.FileProvider
 import com.amzi.codebase.retrofit.response.loginResponse
+import com.amzi.codebase.utility.FilePickerHandler
 import com.amzi.codebase.utility.LogLevel
 import com.amzi.codebase.utility.handleApiError
 import com.amzi.codebase.utility.writeLog
 import com.amzi.codebase.viewmodels.myViewModel
 import com.tillagewireless.ss.data.network.Resource
-import java.io.File
 
 
 @Composable
 fun LoginScreen(
-    viewmodel:myViewModel
+    viewmodel: myViewModel,
+    filePickerHandler: FilePickerHandler
 ) {
 
     val context = LocalContext.current
@@ -80,7 +80,13 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = {  },
+            onClick = {
+
+                     println( filePickerHandler.readTextFromFile())
+//                filePickerHandler.launchFilePicker()
+                filePickerHandler.openSpecificFile()
+
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("OPEN")
@@ -90,22 +96,32 @@ fun LoginScreen(
     when (loginResponse) {
         is Resource.NoAction -> {
             Text("Please enter your credentials and press login.")
-            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Login attempt with phone number: $phoneNumber")
+            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Login attempt with phone number: $phoneNumber"){
+                filePickerHandler.saveTextToFile(it)
+            }
         }
         is Resource.Loading -> {
             CircularProgressIndicator(modifier = Modifier.width(100.dp).height(100.dp))
-            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Login attempt Loading with phone number: $phoneNumber")
+            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Login attempt Loading with phone number: $phoneNumber"){
+                filePickerHandler.saveTextToFile(it)
+
+            }
 
         }
         is Resource.Success -> {
             Text("Login Successful: ${(loginResponse as Resource.Success<loginResponse>).value}")
-            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Response: ${(loginResponse as Resource.Success<loginResponse>).value}")
+            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Response: ${(loginResponse as Resource.Success<loginResponse>).value}"){
+                filePickerHandler.saveTextToFile(it)
+
+            }
 
         }
         is Resource.Failure -> {
             (context as? Activity)?.handleApiError(loginResponse as Resource.Failure)
             Text("Login Failed: ${(loginResponse as Resource.Failure).errorBody}")
-            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Response: FAILED")
+            (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Response: FAILED"){
+                filePickerHandler.saveTextToFile(it)
+            }
 
         }
     }
