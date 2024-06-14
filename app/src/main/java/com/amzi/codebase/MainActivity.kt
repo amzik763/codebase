@@ -20,7 +20,14 @@ import com.amzi.codebase.utility.REQUEST_WRITE_STORAGE
 import com.amzi.codebase.viewmodels.myViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material3.Button
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.amzi.codebase.utility.FilePickerHandler
+import com.amzi.codebase.utility.navigationRoutes
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,23 +41,32 @@ class MainActivity : ComponentActivity() {
 
     @Inject lateinit var filePickerHandler: FilePickerHandler
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            REQUEST_WRITE_STORAGE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission granted, proceed with logging
-                } else {
-                    // Permission denied, handle accordingly
-                }
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permissiongranted, proceed with logging
+            } else {
+                // Permission denied, handle accordingly
             }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CodebaseTheme {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    // Permission already granted, proceed with logging
+                } else {
+                    // You can directly ask for the permission.
+                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -58,33 +74,53 @@ class MainActivity : ComponentActivity() {
                 ) {
                     viewModel.showString()
 //                    Greeting("Android")
-                    LoginScreen(viewmodel = viewModel, filePickerHandler)
+                    AppNavigation()
+//                    LoginScreen(viewmodel = viewModel, filePickerHandler)
                 }
             }
         }
 
-        //
+
         // Request write permission if not granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_WRITE_STORAGE)
         }
-
-
     }
 }
 
+
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun AppNavigation() {
+    val navController = rememberNavController()
+    NavigationGraph(navController)
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    CodebaseTheme {
-        Greeting("Android")
+fun NavigationGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination =navigationRoutes.main.route) {
+        composable(navigationRoutes.main.route) {
+            Screen1(onNavigateToScreen2 = { navController.navigate(navigationRoutes.settings.route) })
+        }
+        composable(navigationRoutes.settings.route) {
+            Screen2(onNavigateToScreen1 = { navController.navigate(navigationRoutes.main.route) })
+        }
+    }
+}
+
+
+
+// Screen1.kt
+@Composable
+fun Screen1(onNavigateToScreen2: () -> Unit) {
+    Button(onClick = onNavigateToScreen2) {
+        Text("Go to Screen 2")
+    }
+}
+
+// Screen1.kt
+@Composable
+fun Screen2(onNavigateToScreen1: () -> Unit) {
+    Button(onClick = onNavigateToScreen1) {
+        Text("Go to Screen 1")
     }
 }

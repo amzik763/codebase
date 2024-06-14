@@ -24,6 +24,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.io.InputStreamReader
 
+
 fun Activity.handleApiError(
     failure: Resource.Failure,
     retry: (() -> Unit)? = null
@@ -123,7 +124,7 @@ class FilePickerHandler(
 
     public fun saveTextToFile(text: String, fileName: String = "example.txt") {
         try {
-            val fileOutputStream: FileOutputStream = activity.openFileOutput(fileName, Context.MODE_PRIVATE)
+            val fileOutputStream: FileOutputStream = activity.openFileOutput(fileName, Context.MODE_APPEND)
             fileOutputStream.write(text.toByteArray())
             fileOutputStream.close()
         } catch (e: IOException) {

@@ -101,7 +101,7 @@ fun LoginScreen(
             }
         }
         is Resource.Loading -> {
-            CircularProgressIndicator(modifier = Modifier.width(100.dp).height(100.dp))
+//            CircularProgressIndicator(modifier = Modifier.width(100.dp).height(100.dp))
             (context as? Activity)?.writeLog(context, LogLevel.INFO, "LoginScreen", "Login attempt Loading with phone number: $phoneNumber"){
                 filePickerHandler.saveTextToFile(it)
 
