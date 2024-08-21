@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "450293758941",
+    "firebase_url": "https://dummyamzi-default-rtdb.firebaseio.com",
+    "project_id": "dummyamzi",
+    "storage_bucket": "dummyamzi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450293758941:android:5c8f031ffcb5f6558c9434",
+        "android_client_info": {
+          "package_name": "com.amzi.codebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450293758941-8m5tdor3si1d9drnc2ev6j31gfk3j3fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amzi.codebase",
+            "certificate_hash": "3813e91d39e09e94541c13b8c6fb64d6428363a6"
+          }
+        },
+        {
+          "client_id": "450293758941-ftqo2g44ue720sq6esultqb57q3te85l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb4D2e-Rd8jK01njI0mwN55xGjL4wtVuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450293758941-ftqo2g44ue720sq6esultqb57q3te85l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

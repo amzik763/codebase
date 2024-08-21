@@ -42,10 +42,8 @@ fun LoginScreen(
 ) {
 
     val context = LocalContext.current
-
     var phoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
     val loginResponse by viewmodel.loginResponse.collectAsState()
 
     Column(
@@ -55,6 +53,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
         TextField(
             value = phoneNumber,
             onValueChange = { phoneNumber = it },
@@ -77,7 +76,6 @@ fun LoginScreen(
         ) {
             Text("Login")
         }
-
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
@@ -92,6 +90,7 @@ fun LoginScreen(
             Text("OPEN")
         }
     }
+
 
     when (loginResponse) {
         is Resource.NoAction -> {
