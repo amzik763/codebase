@@ -1,4 +1,4 @@
-package com.amzi.codebase.utility.firebaseRealtimeDb
+package com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb
 
 import com.amzi.codebase.utility.ResultState
 import kotlinx.coroutines.flow.Flow

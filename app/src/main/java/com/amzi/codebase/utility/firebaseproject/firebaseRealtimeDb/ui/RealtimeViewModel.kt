@@ -1,4 +1,4 @@
-package com.amzi.codebase.utility.firebaseRealtimeDb.ui
+package com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.ui
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.codebase.utility.ResultState
-import com.amzi.codebase.utility.firebaseRealtimeDb.RealtimeModelResponse
-import com.amzi.codebase.utility.firebaseRealtimeDb.RealtimeRepository
+import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.RealtimeModelResponse
+import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.RealtimeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class RealtimeViewModel @Inject constructor(
     val updateRes: State<RealtimeModelResponse> = _updateRes
 
 
-    fun setData(data:RealtimeModelResponse){
+    fun setData(data: RealtimeModelResponse){
         _updateRes.value = data
     }
 

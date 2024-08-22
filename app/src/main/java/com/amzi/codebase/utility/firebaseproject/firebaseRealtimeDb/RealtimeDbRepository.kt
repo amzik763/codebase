@@ -1,4 +1,4 @@
-package com.amzi.codebase.utility.firebaseRealtimeDb
+package com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb
 
 import com.amzi.codebase.utility.ResultState
 import com.google.firebase.database.DataSnapshot
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class RealtimeDbRepository @Inject constructor(
     private val db: DatabaseReference
-): RealtimeRepository{
+): RealtimeRepository {
 
     override fun insert(items: RealtimeModelResponse.RealtimeItems): Flow<ResultState<String>> = callbackFlow {
         trySend(ResultState.Loading)

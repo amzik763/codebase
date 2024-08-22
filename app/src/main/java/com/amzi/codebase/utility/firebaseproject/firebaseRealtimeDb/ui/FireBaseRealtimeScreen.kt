@@ -1,4 +1,4 @@
-package com.amzi.codebase.utility.firebaseRealtimeDb.ui
+package com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.ui
 
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.clickable
@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.amzi.codebase.utility.ResultState
-import com.amzi.codebase.utility.firebaseRealtimeDb.RealtimeModelResponse
+import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.RealtimeModelResponse
 import com.amzi.codebase.utility.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

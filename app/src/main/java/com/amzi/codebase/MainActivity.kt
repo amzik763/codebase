@@ -20,6 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
 import android.annotation.SuppressLint
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
@@ -29,12 +32,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.amzi.codebase.utility.FilePickerHandler
-import com.amzi.codebase.utility.firebaseRealtimeDb.ui.FireBaseRealtimeScreen
+import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.ui.FireBaseRealtimeScreen
+import com.amzi.codebase.utility.firebaseproject.firestoreDb.ui.FirestoreScreen
 import com.amzi.codebase.utility.navigationRoutes
 import javax.inject.Inject
 
@@ -68,6 +74,9 @@ class MainActivity : ComponentActivity() {
                 val isInsert = remember{
                     mutableStateOf(false)
                 }
+                val isInput = remember {
+                    mutableStateOf(false)
+                }
                 if (ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -78,12 +87,19 @@ class MainActivity : ComponentActivity() {
                     // You can directly ask for the permission.
                     requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
+                val navController = rememberNavController()
 
                 // A surface container using the 'background' color from the theme
                 Scaffold (
+
                     floatingActionButton = {
+                        val currentRoute = CurrentRoute(navController = navController)
+
                             FloatingActionButton(onClick = {
-                                isInsert.value = true
+                                if(currentRoute == navigationRoutes.firebase.route)
+                                    isInsert.value = true
+                                else if(currentRoute == navigationRoutes.firestore.route)
+                                    isInput.value = true
                             }) {
                                 Icon(Icons.Default.Add, contentDescription = "Add")
 
@@ -97,7 +113,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         viewModel.showString()
 //                    Greeting("Android")
-                        AppNavigation(isInsert)
+                        AppNavigation(navController, isInsert,isInput)
 //                    LoginScreen(viewmodel = viewModel, filePickerHandler)
                     }
                 }
@@ -112,13 +128,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation(isInsert: MutableState<Boolean>) {
-    val navController = rememberNavController()
-    NavigationGraph(navController,isInsert)
+fun AppNavigation(navController: NavHostController, isInsert: MutableState<Boolean>, isInput: MutableState<Boolean>) {
+    NavigationGraph(navController,isInsert,isInput)
 }
 
 @Composable
-fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boolean>,) {
+fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boolean>, isInput: MutableState<Boolean>) {
     NavHost(navController = navController, startDestination =navigationRoutes.main.route) {
         composable(navigationRoutes.main.route) {
             Screen1(navController)
@@ -129,18 +144,45 @@ fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boo
         composable(navigationRoutes.firebase.route) {
             FireBaseRealtimeScreen( isInsert)
         }
+
+        composable(navigationRoutes.firestore.route) {
+            FirestoreScreen( isInput)
+        }
     }
 }
 
 // Screen1.kt
 @Composable
 fun Screen1(navController: NavHostController) {
-    Button(onClick = { navController.navigate(navigationRoutes.settings.route) }) {
-        Text("Go to Screen 2")
-    }
+    Column {
 
-    Button(onClick = { navController.navigate(navigationRoutes.firebase.route) }) {
-        Text("Fire Firebase")
+
+        Button(
+            onClick = { navController.navigate(navigationRoutes.settings.route) },
+            modifier = Modifier
+                .width(200.dp)
+                .height(55.dp)
+        ) {
+            Text("Go to Screen 2")
+        }
+
+        Button(
+            onClick = { navController.navigate(navigationRoutes.firebase.route) },
+            modifier = Modifier
+                .width(200.dp)
+                .height(55.dp)
+        ) {
+            Text("Fire Firebase")
+        }
+
+        Button(
+            onClick = { navController.navigate(navigationRoutes.firestore.route) },
+            modifier = Modifier
+                .width(200.dp)
+                .height(55.dp)
+        ) {
+            Text("Fire Firestore")
+        }
     }
 }
 
@@ -150,4 +192,11 @@ fun Screen2(onNavigateToScreen1: () -> Unit) {
     Button(onClick = onNavigateToScreen1) {
         Text("Go to Screen 1")
     }
+}
+
+
+@Composable
+fun CurrentRoute(navController: NavHostController): String? {
+    val navBackStackEntry = navController.currentBackStackEntryAsState().value
+    return navBackStackEntry?.destination?.route
 }
