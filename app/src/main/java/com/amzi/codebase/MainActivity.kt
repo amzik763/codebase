@@ -38,6 +38,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.amzi.codebase.screens.Dashboard
+import com.amzi.codebase.screens.Splash
 import com.amzi.codebase.utility.FilePickerHandler
 import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.ui.FireBaseRealtimeScreen
 import com.amzi.codebase.utility.firebaseproject.firestoreDb.ui.FirestoreScreen
@@ -105,7 +107,6 @@ class MainActivity : ComponentActivity() {
 
                             }
                     }
-
                     ){
                     Surface(
                         modifier = Modifier.fillMaxSize(),
@@ -113,7 +114,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         viewModel.showString()
 //                    Greeting("Android")
-                        AppNavigation(navController, isInsert,isInput)
+                        AppNavigation(navController, isInsert, isInput)
 //                    LoginScreen(viewmodel = viewModel, filePickerHandler)
                     }
                 }
@@ -134,7 +135,13 @@ fun AppNavigation(navController: NavHostController, isInsert: MutableState<Boole
 
 @Composable
 fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boolean>, isInput: MutableState<Boolean>) {
-    NavHost(navController = navController, startDestination =navigationRoutes.main.route) {
+    NavHost(navController = navController, startDestination =navigationRoutes.splash.route) {
+        composable(navigationRoutes.splash.route) {
+            Splash(navController)
+        }
+        composable(navigationRoutes.dashboard.route) {
+            Dashboard(navController)
+        }
         composable(navigationRoutes.main.route) {
             Screen1(navController)
         }
@@ -144,7 +151,6 @@ fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boo
         composable(navigationRoutes.firebase.route) {
             FireBaseRealtimeScreen( isInsert)
         }
-
         composable(navigationRoutes.firestore.route) {
             FirestoreScreen( isInput)
         }
@@ -193,7 +199,6 @@ fun Screen2(onNavigateToScreen1: () -> Unit) {
         Text("Go to Screen 1")
     }
 }
-
 
 @Composable
 fun CurrentRoute(navController: NavHostController): String? {
