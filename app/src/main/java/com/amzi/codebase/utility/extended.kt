@@ -23,6 +23,8 @@ import java.io.FileOutputStream
 import java.io.FileWriter
 import java.io.IOException
 import java.io.InputStreamReader
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 fun Activity.handleApiError(
@@ -70,16 +72,9 @@ fun Any.writeLog(context: Context, level: LogLevel, tag:String, message: String,
             LogLevel.WARNING -> Log.w(tag, message)
             LogLevel.VERBOSE -> Log.v(tag, message)
         }
-        saveFile("TAG: $tag :: Message : $message")
-
+        saveFile("TIME: ${getCurrentDateTime()} :: TAG: $tag :: Message : $message")
     }
 }
-
-
-
-
-
-
 //file read and write
 
 class FilePickerHandler(
@@ -165,4 +160,11 @@ class FilePickerHandler(
             ""
         }
     }
+}
+
+
+fun getCurrentDateTime(): String {
+    val current = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    return current.format(formatter)
 }
