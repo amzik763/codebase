@@ -18,5 +18,9 @@ val orangePrimary = Color(0xFFF48007)
 val pureWhite = Color(0xFFFFFFFF)
 val pureBlack = Color(0xFF000000)
 
+val grey = Color(0xFF666666)
+val lightGrey = Color(0xFFC4C4C4)
+val lighterGrey = Color(0xFFDBDBDB)
+
 
 
