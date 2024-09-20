@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class myViewModel @Inject constructor(private val repository: myRepository): ViewModel() {
+class mainViewModel @Inject constructor(private val repository: myRepository): ViewModel() {
 
 
     private val _loginResponse = MutableStateFlow<Resource<loginResponse>>(Resource.NoAction)

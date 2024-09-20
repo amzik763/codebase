@@ -1,7 +1,5 @@
 package com.amzi.codebase.dataClasses
 
-
-
 data class itemMainData(
     val itemID:Int?=0,
     val itemDisplayName:String?="",
@@ -9,31 +7,41 @@ data class itemMainData(
     val itemType: ItemType?=ItemType.ALL,
     val itemLevel:Level?=Level.EASY,
     val isPremium:Boolean?=true,
-    val listOfInnerItems:List<ItemInnerDetails>? = emptyList()
+    val info:String?=""
+)
+
+data class itemMainDataFromServer(
+    val itemID: Int? = 0,
+    val noOfViews:Int?=0,
+    val noOfReviews:Int?=0
 )
 
 data class ItemInnerDetails(
+    val parentID:Int?=0,
     val itemIDInner:Int?=0,
     val itemNameInner:String?="",
+    val info:String?="",
+)
+
+data class ItemInnerDetailsFromServer(
+    val itemID: Int? = 0,
     val gitLink:String?="",
-    val youtubeLink:String?="",
-    val listOfReviews:List<Reviews>? = emptyList(),
-    val codeSnippets:List<CodeSnippets>? = emptyList()
+    val youtubeLink:String?=""
 )
 
 data class CodeSnippets(
     val id:Int?=0,
     val fileName:String?="",
     val code:String?="",
-    val belongsTo:Int?=0
+    val parentID:Int?=0
     )
 
 data class Reviews(
+    val parentID: Int? = 0,
     val name:String?="",
     val review:String?="",
     val stars:Int?=0
 )
-
 
 enum class GroupType(val value:String){
     ALL("All"),
@@ -49,20 +57,18 @@ enum class GroupType(val value:String){
     NAVHOST("Nav Host"),
 }
 
-enum class ItemType(val value:String){
-
-    ALL("All"),
-    LAYOUT("Layout"),
-    INPUTS("Inputs"),
-    STATES("States"),
-    UI("UI"),
-    MEDIA("Media"),
-    DISPLAY("Display"),
-    MENU("Menu"),
-    OTHER("Other"),
-    ANIMATION("Animation"),
-    NAVIGATION("Navigation")
-
+enum class ItemType(val value:String, val info:String){
+    ALL("All", "Lorem Ipsum"),
+    LAYOUT("Layout","Layout Lorem Ipsum"),
+    INPUTS("Inputs","Inputs Lorem Ipsum"),
+    STATES("States","States Lorem Ipsum"),
+    UI("UI","Lorem Ipsum"),
+    MEDIA("Media","Lorem Ipsum"),
+    DISPLAY("Display","Lorem Ipsum"),
+    MENU("Menu","Lorem Ipsum"),
+    OTHER("Other","Lorem Ipsum"),
+    ANIMATION("Animation","Lorem Ipsum"),
+    NAVIGATION("Navigation","Lorem Ipsum")
 }
 
 enum class Level(val value:String){

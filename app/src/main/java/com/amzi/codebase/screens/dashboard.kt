@@ -79,6 +79,7 @@ import com.amzi.codebase.ui.theme.CompactTypography
 import com.amzi.codebase.ui.theme.lightBlack
 import com.amzi.codebase.ui.theme.lightGrey
 import com.amzi.codebase.ui.theme.lighterGrey
+import com.amzi.codebase.ui.theme.orangePrimary
 import com.amzi.codebase.ui.theme.paleWhite
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -261,7 +262,7 @@ fun ViewPagerWithTabs() {
                                     .height(5.dp)
                                     .padding(start = 2.dp)
                                     .clip(RoundedCornerShape(50))
-                                    .background(Color(0xFFFFA500))
+                                    .background(color = orangePrimary)
                             )
                         }
                     }
