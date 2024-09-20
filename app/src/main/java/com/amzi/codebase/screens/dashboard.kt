@@ -22,6 +22,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -77,6 +80,7 @@ import com.amzi.codebase.ui.theme.lightBlack
 import com.amzi.codebase.ui.theme.lightGrey
 import com.amzi.codebase.ui.theme.lighterGrey
 import com.amzi.codebase.ui.theme.paleWhite
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.min
@@ -185,83 +189,50 @@ fun SearchBar(
     }
 }
 
-
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ViewPagerWithTabs() {
     val tabTitles = listOf(
-        "All", "Layout", "Input", "Widgets", "Layout", "Input", "Widgets",
-        "Layout", "Input", "Widgets"
+        "Layout", "Inputs", "State", "UI", "Media", "Display", "Menu", "Other", "Animation", "Navigation"
     )
+
     val pagerState = rememberPagerState(initialPage = 0, initialPageOffsetFraction = 0f) {
         tabTitles.size
     }
+
     val coroutineScope = rememberCoroutineScope()
-    val scrollState = rememberScrollState()
+    val lazyListState = rememberLazyListState() // Use LazyListState for LazyRow scroll
 
-    // Track tab offsets and widths
-    val tabPositions = remember { mutableStateMapOf<Int, IntOffset>() }
+    // Track tab widths
     val tabWidths = remember { mutableStateMapOf<Int, Int>() }
-    val localDensity = LocalDensity.current
-    val localConfiguration = LocalConfiguration.current
-    // Use LaunchedEffect to handle page changes and scrolling
+
+    // LaunchedEffect to scroll to the active tab when page changes
     LaunchedEffect(pagerState.currentPage) {
-        val page = pagerState.currentPage
-        val tabPosition = tabPositions[page] ?: return@LaunchedEffect
-        val tabWidth = tabWidths[page] ?: return@LaunchedEffect
+        val tabWidth = tabWidths[pagerState.currentPage] ?: return@LaunchedEffect
 
-        val scrollX = scrollState.value.toFloat()
-        val screenWidthPx = with(localDensity) { localConfiguration.screenWidthDp.dp.toPx() }
-        val tabLeftEdge = tabPosition.x.toFloat()
-        val tabRightEdge = tabLeftEdge + tabWidth
-
-        // Log values for debugging
-        Log.d("ViewPagerWithTabs", "Current Page: $page")
-        Log.d("ViewPagerWithTabs", "Tab Position: $tabPosition")
-        Log.d("ViewPagerWithTabs", "Tab Width: $tabWidth")
-        Log.d("ViewPagerWithTabs", "Scroll X: $scrollX")
-        Log.d("ViewPagerWithTabs", "Screen Width (px): $screenWidthPx")
-        Log.d("ViewPagerWithTabs", "Tab Left Edge: $tabLeftEdge")
-        Log.d("ViewPagerWithTabs", "Tab Right Edge: $tabRightEdge")
-
-        // Determine the scroll offset
-        val targetScrollX: Int = when {
-            tabLeftEdge < scrollX -> {
-                Log.d("ViewPagerWithTabs", "Scrolling left to: ${tabLeftEdge.toInt()}")
-                tabLeftEdge.toInt() // Scroll left
-            }
-            tabRightEdge > scrollX - page*40 + screenWidthPx-> {
-                val scrollTarget = (tabRightEdge - screenWidthPx).toInt() + page*40
-                Log.d("ViewPagerWithTabs", "Scrolling right to: $scrollTarget")
-                scrollTarget // Scroll right
-            }
-            else -> {
-                Log.d("ViewPagerWithTabs", "No scrolling needed")
-                return@LaunchedEffect // No scrolling needed
-            }
+        // Scroll to the item in LazyRow, adjusting to prevent cutting off on the left
+        coroutineScope.launch {
+            lazyListState.animateScrollToItem(
+                pagerState.currentPage,
+                scrollOffset = 0 // Ensures the selected tab is fully visible from the start
+            )
         }
-
-        // Animate the scroll to the target position
-        scrollState.animateScrollTo(targetScrollX)
-        Log.d("ViewPagerWithTabs", "Animated Scroll To: $targetScrollX")
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Custom scrollable tab row
-        Row(
+        // LazyRow for the scrollable tab row
+        LazyRow(
+            state = lazyListState, // Use LazyListState for scrolling
             modifier = Modifier
                 .fillMaxWidth()
-                .horizontalScroll(scrollState)
                 .padding(vertical = 8.dp, horizontal = 0.dp)
         ) {
-            tabTitles.forEachIndexed { index, title ->
+            itemsIndexed(tabTitles) { index, title ->
                 Box(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 8.dp) // Reduced padding to prevent cutting
                         .onGloballyPositioned { coordinates ->
-                            // Capture the global position and width of each tab
-                            tabPositions[index] = IntOffset(coordinates.positionInWindow().x.toInt(), 0)
+                            // Capture the width of each tab
                             tabWidths[index] = coordinates.size.width
                         }
                         .clickable {
@@ -270,11 +241,14 @@ fun ViewPagerWithTabs() {
                             }
                         }
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(modifier = Modifier.padding(top = 8.dp),horizontalAlignment = Alignment.Start) {
                         // Text for each tab
                         Text(
                             text = title,
-                            color = if (pagerState.currentPage == index) Color.Black else Color.Gray,
+                            color = if (pagerState.currentPage == index) lightBlack else lightGrey,
+                            style = TextStyle(
+                                fontFamily = CompactTypography.bodyMedium.fontFamily,
+                        )
                         )
 
                         Spacer(modifier = Modifier.height(4.dp))
@@ -283,8 +257,9 @@ fun ViewPagerWithTabs() {
                         if (pagerState.currentPage == index) {
                             Box(
                                 modifier = Modifier
-                                    .width(10.dp)
+                                    .width(18.dp)
                                     .height(5.dp)
+                                    .padding(start = 2.dp)
                                     .clip(RoundedCornerShape(50))
                                     .background(Color(0xFFFFA500))
                             )

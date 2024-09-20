@@ -77,6 +77,11 @@ val outfitBold2 = FontFamily(
 
 )
 
+val outfitMedium = FontFamily(
+    Font(R.font.outfitmedium)
+
+)
+
 val outfitBoldTextSmall = TextStyle(
     fontFamily = outfitBold2,
 )
@@ -137,13 +142,13 @@ val CompactTypography = Typography(
     ),
 
     bodyLarge = TextStyle(
-        fontFamily = outfitRegular,
+        fontFamily = outfitBold,
         fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
     ),
 
     bodyMedium = TextStyle(
-        fontFamily = outfitRegular,
+        fontFamily = outfitMedium,
         fontWeight = FontWeight.SemiBold,
         fontSize = 14.sp,
     ),
