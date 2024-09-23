@@ -12,11 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -43,13 +39,15 @@ import com.amzi.codebase.utility.firebaseproject.firebaseRealtimeDb.ui.FireBaseR
 import com.amzi.codebase.utility.firebaseproject.firestoreDb.ui.FirestoreScreen
 import com.amzi.codebase.utility.navigationRoutes
 import com.amzi.codebase.viewmodels.mainViewModel
+import com.amzi.codebase.viewmodels.uiViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: mainViewModel by viewModels()
+    private val mainViewModel: mainViewModel by viewModels()
+    private val uiViewModel: uiViewModel by viewModels()
 
     //or
 //  @Inject
@@ -93,8 +91,7 @@ class MainActivity : ComponentActivity() {
 
                 // A surface container using the 'background' color from the theme
                 Scaffold (
-
-                    floatingActionButton = {
+                   /* floatingActionButton = {
                         val currentRoute = CurrentRoute(navController = navController)
 
                             FloatingActionButton(onClick = {
@@ -106,21 +103,20 @@ class MainActivity : ComponentActivity() {
                                 Icon(Icons.Default.Add, contentDescription = "Add")
 
                             }
-                    }
+                    }*/
                     ){
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        viewModel.showString()
+                        mainViewModel.showString()
 //                    Greeting("Android")
-                        AppNavigation(navController, isInsert, isInput)
+                        AppNavigation(navController, isInsert, isInput, mainViewModel)
 //                    LoginScreen(viewmodel = viewModel, filePickerHandler)
                     }
                 }
             }
         }
-
         // Request write permission if not granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_WRITE_STORAGE)
@@ -129,18 +125,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation(navController: NavHostController, isInsert: MutableState<Boolean>, isInput: MutableState<Boolean>) {
-    NavigationGraph(navController,isInsert,isInput)
+fun AppNavigation(
+    navController: NavHostController,
+    isInsert: MutableState<Boolean>,
+    isInput: MutableState<Boolean>,
+    mainViewModel: mainViewModel
+) {
+    NavigationGraph(navController,isInsert,isInput,mainViewModel)
 }
 
 @Composable
-fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boolean>, isInput: MutableState<Boolean>) {
+fun NavigationGraph(
+    navController: NavHostController,
+    isInsert: MutableState<Boolean>,
+    isInput: MutableState<Boolean>,
+    mainViewModel: mainViewModel
+) {
     NavHost(navController = navController, startDestination =navigationRoutes.splash.route) {
         composable(navigationRoutes.splash.route) {
             Splash(navController)
         }
         composable(navigationRoutes.dashboard.route) {
-            Dashboard(navController)
+            Dashboard(navController,mainViewModel)
         }
         composable(navigationRoutes.main.route) {
             Screen1(navController)
@@ -161,8 +167,6 @@ fun NavigationGraph(navController: NavHostController, isInsert: MutableState<Boo
 @Composable
 fun Screen1(navController: NavHostController) {
     Column {
-
-
         Button(
             onClick = { navController.navigate(navigationRoutes.settings.route) },
             modifier = Modifier
@@ -171,7 +175,6 @@ fun Screen1(navController: NavHostController) {
         ) {
             Text("Go to Screen 2")
         }
-
         Button(
             onClick = { navController.navigate(navigationRoutes.firebase.route) },
             modifier = Modifier
@@ -180,7 +183,6 @@ fun Screen1(navController: NavHostController) {
         ) {
             Text("Fire Firebase")
         }
-
         Button(
             onClick = { navController.navigate(navigationRoutes.firestore.route) },
             modifier = Modifier

@@ -17,6 +17,9 @@ import javax.inject.Inject
 class mainViewModel @Inject constructor(private val repository: myRepository): ViewModel() {
 
 
+    val selectedItem = MutableStateFlow<Int?>(0)
+
+
     private val _loginResponse = MutableStateFlow<Resource<loginResponse>>(Resource.NoAction)
     val loginResponse: StateFlow<Resource<loginResponse>> = _loginResponse
 
@@ -37,6 +40,9 @@ class mainViewModel @Inject constructor(private val repository: myRepository): V
         _loginResponse.value = repository.runAPI(mobileNumber, password)
     }
 
+    fun updateCurrentPage(currentPage: Int) {
+        selectedItem.value = currentPage
+    }
 
 
 }

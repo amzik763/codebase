@@ -1,15 +1,11 @@
 package com.amzi.codebase.screens
 
 import android.util.Log
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,36 +13,24 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -60,39 +44,31 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.amzi.codebase.R
+import com.amzi.codebase.dataClasses.ItemType
 import com.amzi.codebase.ui.theme.CompactTypography
 import com.amzi.codebase.ui.theme.lightBlack
 import com.amzi.codebase.ui.theme.lightGrey
 import com.amzi.codebase.ui.theme.lighterGrey
 import com.amzi.codebase.ui.theme.orangePrimary
 import com.amzi.codebase.ui.theme.paleWhite
-import kotlinx.coroutines.CoroutineScope
+import com.amzi.codebase.viewmodels.mainViewModel
 import kotlinx.coroutines.launch
-import kotlin.math.max
-import kotlin.math.min
 
 @Composable
-fun Dashboard(navController: NavHostController) {
-
+fun Dashboard(navController: NavHostController, mainViewModel: mainViewModel) {
+    val selectedItemIndex = mainViewModel.selectedItem.collectAsState()
     Column {
         Log.d("MainActivity.TAG","Dashboard")
         Header()
-        ViewPagerWithTabs()
+        ViewPagerWithTabs(selectedItemIndex.value, mainViewModel)
 
     }
 }
@@ -192,13 +168,15 @@ fun SearchBar(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ViewPagerWithTabs() {
+fun ViewPagerWithTabs(selectedItemIndex: Int?, mainViewModel: mainViewModel) {
     val tabTitles = listOf(
         "Layout", "Inputs", "State", "UI", "Media", "Display", "Menu", "Other", "Animation", "Navigation"
     )
 
+    var tasbTitles  = ItemType.entries.associate { it.value to it.info }.toList()
+
     val pagerState = rememberPagerState(initialPage = 0, initialPageOffsetFraction = 0f) {
-        tabTitles.size
+        tasbTitles.size
     }
 
     val coroutineScope = rememberCoroutineScope()
@@ -211,6 +189,8 @@ fun ViewPagerWithTabs() {
     LaunchedEffect(pagerState.currentPage) {
         val tabWidth = tabWidths[pagerState.currentPage] ?: return@LaunchedEffect
 
+//        mainViewModel.selectedItem.value = pagerState.currentPage
+        mainViewModel.updateCurrentPage(pagerState.currentPage)
         // Scroll to the item in LazyRow, adjusting to prevent cutting off on the left
         coroutineScope.launch {
             lazyListState.animateScrollToItem(
@@ -228,7 +208,7 @@ fun ViewPagerWithTabs() {
                 .fillMaxWidth()
                 .padding(vertical = 8.dp, horizontal = 0.dp)
         ) {
-            itemsIndexed(tabTitles) { index, title ->
+            itemsIndexed(tasbTitles) { index, (key,value) ->
                 Box(
                     modifier = Modifier
                         .padding(horizontal = 8.dp) // Reduced padding to prevent cutting
@@ -245,7 +225,7 @@ fun ViewPagerWithTabs() {
                     Column(modifier = Modifier.padding(top = 8.dp),horizontalAlignment = Alignment.Start) {
                         // Text for each tab
                         Text(
-                            text = title,
+                            text = key,
                             color = if (pagerState.currentPage == index) lightBlack else lightGrey,
                             style = TextStyle(
                                 fontFamily = CompactTypography.bodyMedium.fontFamily,
@@ -276,9 +256,7 @@ fun ViewPagerWithTabs() {
             modifier = Modifier.weight(1f),
         ) { page ->
             // Content for each page
-            Box(modifier = Modifier.fillMaxSize()) {
-                Text("Page: ${tabTitles[page]}", modifier = Modifier.align(Alignment.Center))
-            }
+            DashboardContent(tasbTitles,selectedItemIndex)
         }
     }
 }
