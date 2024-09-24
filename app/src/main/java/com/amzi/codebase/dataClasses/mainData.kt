@@ -3,8 +3,8 @@ package com.amzi.codebase.dataClasses
 data class itemMainData(
     val itemID:Int?=0,
     val itemDisplayName:String?="",
-    val itemGroup:GroupType?=GroupType.ALL,
-    val itemType: ItemType?=ItemType.ALL,
+    val itemGroup:GroupType?=null,
+    val itemType: ItemType?=null,
     val itemLevel:Level?=Level.EASY,
     val isPremium:Boolean?=true,
     val info:String?=""
@@ -44,7 +44,6 @@ data class Reviews(
 )
 
 enum class GroupType(val value:String){
-    ALL("All"),
     COLUMN("Column"),
     ROW("Row"),
     GRID("Grid"),
@@ -57,9 +56,8 @@ enum class GroupType(val value:String){
     NAVHOST("Nav Host"),
 }
 
-enum class ItemType(val value:String, val info:String){
-    ALL("All", "Lorem Ipsum"),
-    LAYOUT("Layout","Layout Lorem Ipsum"),
+enum class ItemType(val value:String, val info:String) {
+    LAYOUT("Layout","Layouts are used to define how UI elements (composables) are arranged and displayed on the screen. These functions determine the position, size, and alignment of child composables."),
     INPUTS("Inputs","Inputs Lorem Ipsum"),
     STATES("States","States Lorem Ipsum"),
     UI("UI","Lorem Ipsum"),

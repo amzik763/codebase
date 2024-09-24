@@ -1,5 +1,6 @@
 package com.amzi.codebase
 
+import Dashboard
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -30,7 +31,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.amzi.codebase.screens.Dashboard
 import com.amzi.codebase.screens.Splash
 import com.amzi.codebase.ui.theme.CodebaseTheme
 import com.amzi.codebase.utility.FilePickerHandler

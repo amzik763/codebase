@@ -8,11 +8,41 @@ fun createItemMainData(): List<itemMainData> {
         itemMainData(itemID = 4, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, isPremium = false, info = "A dialog that alerts the user."),
         itemMainData(itemID = 5, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, isPremium = true, info = "A menu that drops down to show options."),
         itemMainData(itemID = 6, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, isPremium = true, info = "A component that navigates between screens."),
-        itemMainData(itemID = 7, itemDisplayName = "Media Player", itemGroup = GroupType.ALL, itemType = ItemType.MEDIA, itemLevel = Level.HARD, isPremium = false, info = "A player for audio and video media."),
-        itemMainData(itemID = 8, itemDisplayName = "State Management", itemGroup = GroupType.ALL, itemType = ItemType.STATES, itemLevel = Level.EASY, isPremium = true, info = "Managing the state of the application."),
-        itemMainData(itemID = 9, itemDisplayName = "Animations", itemGroup = GroupType.ALL, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
-        itemMainData(itemID = 10, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, isPremium = false, info = "A host for managing navigation in your app.")
+        itemMainData(itemID = 7, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, isPremium = false, info = "A player for audio and video media."),
+        itemMainData(itemID = 8, itemDisplayName = "State Management", itemGroup = GroupType.COLUMN, itemType = ItemType.STATES, itemLevel = Level.EASY, isPremium = true, info = "Managing the state of the application."),
+        itemMainData(itemID = 9, itemDisplayName = "Animations", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
+        itemMainData(itemID = 10, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
+        itemMainData(itemID =11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
+        itemMainData(itemID = 12, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
+        itemMainData(itemID = 13, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, isPremium = false, info = "A host for managing navigation in your app.")
     )
+}
+
+fun create2DList(): List<List<itemMainData>> {
+    val allItems = createItemMainData()
+
+    // Create a 2D list
+    val groupedItems: MutableList<List<itemMainData>> = mutableListOf()
+
+    // Grouping based on ItemType
+    val layoutItems = allItems.filter { it.itemType == ItemType.LAYOUT }
+    val uiItems = allItems.filter { it.itemType == ItemType.UI }
+    val menuItems = allItems.filter { it.itemType == ItemType.MENU }
+    val navigationItems = allItems.filter { it.itemType == ItemType.NAVIGATION }
+    val mediaItems = allItems.filter { it.itemType == ItemType.MEDIA }
+    val statesItems = allItems.filter { it.itemType == ItemType.STATES }
+    val animationItems = allItems.filter { it.itemType == ItemType.ANIMATION }
+
+    // Add the grouped lists to the 2D list
+    groupedItems.add(layoutItems)
+    groupedItems.add(uiItems)
+    groupedItems.add(menuItems)
+    groupedItems.add(navigationItems)
+    groupedItems.add(mediaItems)
+    groupedItems.add(statesItems)
+    groupedItems.add(animationItems)
+
+    return groupedItems
 }
 
 // Function to create ItemInnerDetails linked by parentID
