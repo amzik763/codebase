@@ -2,19 +2,19 @@ package com.amzi.codebase.dataClasses
 // Function to create ItemMainData
 fun createItemMainData(): List<itemMainData> {
     return listOf(
-        itemMainData(itemID = 1, itemDisplayName = "Row Layout", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, isPremium = true, info = "A layout that arranges items in a horizontal sequence."),
-        itemMainData(itemID = 2, itemDisplayName = "Column Layout", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, isPremium = false, info = "A layout that arranges items in a vertical sequence."),
-        itemMainData(itemID = 3, itemDisplayName = "Grid Layout", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.HARD, isPremium = true, info = "A layout that arranges items in a grid format."),
-        itemMainData(itemID = 4, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, isPremium = false, info = "A dialog that alerts the user."),
-        itemMainData(itemID = 5, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, isPremium = true, info = "A menu that drops down to show options."),
-        itemMainData(itemID = 6, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, isPremium = true, info = "A component that navigates between screens."),
-        itemMainData(itemID = 7, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, isPremium = false, info = "A player for audio and video media."),
-        itemMainData(itemID = 8, itemDisplayName = "State Management", itemGroup = GroupType.COLUMN, itemType = ItemType.STATES, itemLevel = Level.EASY, isPremium = true, info = "Managing the state of the application."),
-        itemMainData(itemID = 9, itemDisplayName = "Animations", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
-        itemMainData(itemID = 10, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
-        itemMainData(itemID =11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
-        itemMainData(itemID = 12, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, isPremium = true, info = "Adding animations to your UI."),
-        itemMainData(itemID = 13, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, isPremium = false, info = "A host for managing navigation in your app.")
+        itemMainData(itemID = 1, itemDisplayName = "Row Layout", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A layout that arranges items in a horizontal sequence."),
+        itemMainData(itemID = 2, itemDisplayName = "Column Layout", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a vertical sequence."),
+        itemMainData(itemID = 3, itemDisplayName = "Grid Layout", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.HARD, info = "A layout that arranges items in a grid format."),
+        itemMainData(itemID = 4, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
+        itemMainData(itemID = 5, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, info = "A menu that drops down to show options."),
+        itemMainData(itemID = 6, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, info = "A component that navigates between screens."),
+        itemMainData(itemID = 7, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, info = "A player for audio and video media."),
+        itemMainData(itemID = 8, itemDisplayName = "State Management", itemGroup = GroupType.COLUMN, itemType = ItemType.STATES, itemLevel = Level.EASY, info = "Managing the state of the application."),
+        itemMainData(itemID = 9, itemDisplayName = "Animations", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 10, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID =11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 12, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 13, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, info = "A host for managing navigation in your app.")
     )
 }
 
