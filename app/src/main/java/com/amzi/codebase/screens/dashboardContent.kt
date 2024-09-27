@@ -3,6 +3,7 @@ package com.amzi.codebase.screens
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.amzi.codebase.R
 import com.amzi.codebase.dataClasses.Level
 import com.amzi.codebase.dataClasses.itemMainData
@@ -36,6 +38,7 @@ import com.amzi.codebase.ui.theme.grey
 import com.amzi.codebase.ui.theme.lightGrey
 import com.amzi.codebase.ui.theme.red
 import com.amzi.codebase.ui.theme.yellow
+import com.amzi.codebase.utility.navigationRoutes
 import com.amzi.codebase.viewmodels.mainViewModel
 
 @Composable
@@ -43,15 +46,21 @@ fun DashboardContent(
     tabTitles: String,
     selectedItemIndex: Int?,
     mainViewModel: mainViewModel,
-    items: List<itemMainData>
+    items: List<itemMainData>,
+    navController: NavHostController
 ) {
     Log.d("MainActivity.TAG","DashboardContent" + selectedItemIndex + tabTitles)
-    MainItem(tabTitles,mainViewModel,items)
+    MainItem(tabTitles,mainViewModel,items,navController)
 }
 
 
 @Composable
-fun MainItem(tabTitles: String, mainViewModel: mainViewModel, items: List<itemMainData>) {
+fun MainItem(
+    tabTitles: String,
+    mainViewModel: mainViewModel,
+    items: List<itemMainData>,
+    navController: NavHostController
+) {
 
     Column(modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp)) {
         Text( tabTitles, textAlign = TextAlign.Justify, style = TextStyle(fontFamily = CompactTypography.bodyMedium.fontFamily, color = grey, fontSize = 15.sp))
@@ -63,7 +72,9 @@ fun MainItem(tabTitles: String, mainViewModel: mainViewModel, items: List<itemMa
         ) {
             itemsIndexed(items) { index, item ->
 
-                Row(modifier = Modifier.padding(vertical = 4.dp).fillMaxWidth().height(44.dp)) {
+                Row(modifier = Modifier.padding(vertical = 4.dp).fillMaxWidth().height(44.dp).clickable {
+                    navController.navigate(navigationRoutes.items.route)
+                }) {
                     LevelCircle(item.itemLevel!!)
                     Spacer(modifier = Modifier.size(8.dp))
                     Column(modifier = Modifier.fillMaxWidth(0.55f)) {

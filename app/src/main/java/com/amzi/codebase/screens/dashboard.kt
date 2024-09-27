@@ -67,7 +67,7 @@ fun Dashboard(navController: NavHostController, mainViewModel: mainViewModel) {
     Column {
         Log.d("MainActivity.TAG", "Dashboard")
         Header() // Header can remain stateless if it's independent of the mainViewModel.
-        ViewPagerWithTabs(selectedItemIndex, mainViewModel) // Pass the selected item to ViewPager.
+        ViewPagerWithTabs(selectedItemIndex, mainViewModel, navController) // Pass the selected item to ViewPager.
     }
 }
 
@@ -168,7 +168,11 @@ fun SearchBar(
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ViewPagerWithTabs(selectedItemIndex: Int?, mainViewModel: mainViewModel) {
+fun ViewPagerWithTabs(
+    selectedItemIndex: Int?,
+    mainViewModel: mainViewModel,
+    navController: NavHostController
+) {
 
     val titles = remember { ItemType.entries.associate { it.value to it.info }.toList() }
 
@@ -216,7 +220,7 @@ fun ViewPagerWithTabs(selectedItemIndex: Int?, mainViewModel: mainViewModel) {
             state = pagerState,
             modifier = Modifier.weight(1f)
         ) { page ->
-            DashboardContent(titles[page].second, page, mainViewModel,mainViewModel.allItems.get(page))
+            DashboardContent(titles[page].second, page, mainViewModel,mainViewModel.allItems.get(page), navController)
         }
     }
 }

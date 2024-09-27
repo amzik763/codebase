@@ -23,6 +23,7 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
     val selectedItem = MutableStateFlow<Int?>(0)
     val selectedItemType = MutableStateFlow<ItemType>(ItemType.LAYOUT)
     val allItems = create2DList()
+    val allInnerItems = create2DList()
 
     private val _layoutItems = MutableStateFlow<List<itemMainData>>(allItems.get(0))
     val layoutItems: StateFlow<List<itemMainData>> = _layoutItems.asStateFlow()
@@ -59,10 +60,6 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
         selectedItem.value = currentPage
         selectedItemType.value = ItemType.entries.firstOrNull { it.value == itemType } ?: ItemType.LAYOUT
     }
-
-
-
-
 
     fun getItems(type: ItemType): List<itemMainData> {
         return when (type) {

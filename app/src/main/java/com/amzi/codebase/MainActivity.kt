@@ -32,6 +32,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.amzi.codebase.screens.Splash
+import com.amzi.codebase.screens.items
 import com.amzi.codebase.ui.theme.CodebaseTheme
 import com.amzi.codebase.utility.FilePickerHandler
 import com.amzi.codebase.utility.REQUEST_WRITE_STORAGE
@@ -147,6 +148,9 @@ fun NavigationGraph(
         }
         composable(navigationRoutes.dashboard.route) {
             Dashboard(navController,mainViewModel)
+        }
+        composable(navigationRoutes.items.route) {
+            items(navController,mainViewModel)
         }
         composable(navigationRoutes.main.route) {
             Screen1(navController)
