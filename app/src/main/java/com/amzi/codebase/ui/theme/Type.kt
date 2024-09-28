@@ -124,7 +124,7 @@ val CompactTypography = Typography(
     ),
 
     titleLarge = TextStyle(
-        fontFamily = outfitRegular,
+        fontFamily = outfitBold,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
     ),

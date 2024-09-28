@@ -73,6 +73,7 @@ fun MainItem(
             itemsIndexed(items) { index, item ->
 
                 Row(modifier = Modifier.padding(vertical = 4.dp).fillMaxWidth().height(44.dp).clickable {
+                    mainViewModel.updateSelectedInnerItem(mainViewModel.selectedItem.value,index)
                     navController.navigate(navigationRoutes.items.route)
                 }) {
                     LevelCircle(item.itemLevel!!)

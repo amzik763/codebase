@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.codebase.dataClasses.ItemType
 import com.amzi.codebase.dataClasses.create2DList
+import com.amzi.codebase.dataClasses.createItemInnerDetails
 import com.amzi.codebase.dataClasses.itemMainData
 import com.amzi.codebase.repository.myRepository
 import com.amzi.codebase.retrofit.response.loginResponse
@@ -22,8 +23,11 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
 
     val selectedItem = MutableStateFlow<Int?>(0)
     val selectedItemType = MutableStateFlow<ItemType>(ItemType.LAYOUT)
+
+    var selectedInnerItem = MutableStateFlow<itemMainData?>(null)
+
     val allItems = create2DList()
-    val allInnerItems = create2DList()
+    val allInnerItems = createItemInnerDetails()
 
     private val _layoutItems = MutableStateFlow<List<itemMainData>>(allItems.get(0))
     val layoutItems: StateFlow<List<itemMainData>> = _layoutItems.asStateFlow()
@@ -84,5 +88,9 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
     fun showString() {
         Log.d("FromViewModel", "Showing String")
         repository.showAnotherMessage()
+    }
+
+    fun updateSelectedInnerItem(index: Int?, innerIndex: Int) {
+        selectedInnerItem.value = allItems.get(index?:0).get(innerIndex)
     }
 }

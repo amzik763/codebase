@@ -3,6 +3,7 @@ package com.amzi.codebase
 import Dashboard
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,16 +24,20 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.amzi.codebase.screens.Items
 import com.amzi.codebase.screens.Splash
-import com.amzi.codebase.screens.items
 import com.amzi.codebase.ui.theme.CodebaseTheme
 import com.amzi.codebase.utility.FilePickerHandler
 import com.amzi.codebase.utility.REQUEST_WRITE_STORAGE
@@ -150,7 +155,7 @@ fun NavigationGraph(
             Dashboard(navController,mainViewModel)
         }
         composable(navigationRoutes.items.route) {
-            items(navController,mainViewModel)
+            Items(navController,mainViewModel)
         }
         composable(navigationRoutes.main.route) {
             Screen1(navController)
@@ -210,4 +215,17 @@ fun Screen2(onNavigateToScreen1: () -> Unit) {
 fun CurrentRoute(navController: NavHostController): String? {
     val navBackStackEntry = navController.currentBackStackEntryAsState().value
     return navBackStackEntry?.destination?.route
+}
+
+@Composable
+fun ChangeStatusBarColor(color: Color, darkIcons: Boolean = false) {
+    val activity = LocalContext.current as Activity
+    val window = activity.window
+
+    // Change the status bar color
+    window.statusBarColor = color.toArgb()
+
+    // For changing the status bar icon color (light/dark)
+    val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+    insetsController.isAppearanceLightStatusBars = darkIcons
 }

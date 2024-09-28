@@ -2,19 +2,19 @@ package com.amzi.codebase.dataClasses
 // Function to create ItemMainData
 fun createItemMainData(): List<itemMainData> {
     return listOf(
-        itemMainData(itemID = 1, itemDisplayName = "Row Layout", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A layout that arranges items in a horizontal sequence."),
-        itemMainData(itemID = 2, itemDisplayName = "Column Layout", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a vertical sequence."),
-        itemMainData(itemID = 3, itemDisplayName = "Grid Layout", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.HARD, info = "A layout that arranges items in a grid format."),
-        itemMainData(itemID = 4, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
-        itemMainData(itemID = 5, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, info = "A menu that drops down to show options."),
-        itemMainData(itemID = 6, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, info = "A component that navigates between screens."),
-        itemMainData(itemID = 7, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, info = "A player for audio and video media."),
-        itemMainData(itemID = 8, itemDisplayName = "State Management", itemGroup = GroupType.COLUMN, itemType = ItemType.STATES, itemLevel = Level.EASY, info = "Managing the state of the application."),
-        itemMainData(itemID = 9, itemDisplayName = "Animations", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 0, itemDisplayName = "Row Layout", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A layout that arranges items in a horizontal sequence."),
+        itemMainData(itemID = 1, itemDisplayName = "Column Layout", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a vertical sequence."),
+        itemMainData(itemID = 2, itemDisplayName = "Grid Layout", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.HARD, info = "A layout that arranges items in a grid format."),
+        itemMainData(itemID = 3, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
+        itemMainData(itemID = 4, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, info = "A menu that drops down to show options."),
+        itemMainData(itemID = 5, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, info = "A component that navigates between screens."),
+        itemMainData(itemID = 6, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, info = "A player for audio and video media."),
+        itemMainData(itemID = 7, itemDisplayName = "State Management", itemGroup = GroupType.COLUMN, itemType = ItemType.STATES, itemLevel = Level.EASY, info = "Managing the state of the application."),
+        itemMainData(itemID = 8, itemDisplayName = "Animations", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 9, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
         itemMainData(itemID = 10, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
-        itemMainData(itemID =11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
-        itemMainData(itemID = 12, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
-        itemMainData(itemID = 13, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, info = "A host for managing navigation in your app.")
+        itemMainData(itemID = 11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
+        itemMainData(itemID = 12, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, info = "A host for managing navigation in your app.")
     )
 }
 
@@ -48,16 +48,16 @@ fun create2DList(): List<List<itemMainData>> {
 // Function to create ItemInnerDetails linked by parentID
 fun createItemInnerDetails(): List<ItemInnerDetails> {
     return listOf(
-        ItemInnerDetails(parentID = 1, itemIDInner = 1, itemNameInner = "Row Item 1", info = "First item in row layout."),
-        ItemInnerDetails(parentID = 1, itemIDInner = 2, itemNameInner = "Row Item 2", info = "Second item in row layout."),
-        ItemInnerDetails(parentID = 2, itemIDInner = 3, itemNameInner = "Column Item 1", info = "First item in column layout."),
-        ItemInnerDetails(parentID = 2, itemIDInner = 4, itemNameInner = "Column Item 2", info = "Second item in column layout."),
-        ItemInnerDetails(parentID = 3, itemIDInner = 5, itemNameInner = "Grid Item 1", info = "First item in grid layout."),
-        ItemInnerDetails(parentID = 3, itemIDInner = 6, itemNameInner = "Grid Item 2", info = "Second item in grid layout."),
-        ItemInnerDetails(parentID = 4, itemIDInner = 7, itemNameInner = "Dialog Item 1", info = "Item related to alert dialog."),
-        ItemInnerDetails(parentID = 5, itemIDInner = 8, itemNameInner = "Dropdown Item 1", info = "First item in dropdown menu."),
-        ItemInnerDetails(parentID = 6, itemIDInner = 9, itemNameInner = "Navigator Item 1", info = "Item related to navigator."),
-        ItemInnerDetails(parentID = 7, itemIDInner = 10, itemNameInner = "Media Item 1", info = "Item for media player.")
+        ItemInnerDetails(parentID = 0, itemIDInner = 0, itemNameInner = "Row Item 1", info = "First item in row layout."),
+        ItemInnerDetails(parentID = 0, itemIDInner = 1, itemNameInner = "Row Item 2", info = "Second item in row layout."),
+        ItemInnerDetails(parentID = 1, itemIDInner = 2, itemNameInner = "Column Item 1", info = "First item in column layout."),
+        ItemInnerDetails(parentID = 1, itemIDInner = 3, itemNameInner = "Column Item 2", info = "Second item in column layout."),
+        ItemInnerDetails(parentID = 2, itemIDInner = 4, itemNameInner = "Grid Item 1", info = "First item in grid layout."),
+        ItemInnerDetails(parentID = 2, itemIDInner = 5, itemNameInner = "Grid Item 2", info = "Second item in grid layout."),
+        ItemInnerDetails(parentID = 3, itemIDInner = 6, itemNameInner = "Dialog Item 1", info = "Item related to alert dialog."),
+        ItemInnerDetails(parentID = 4, itemIDInner = 7, itemNameInner = "Dropdown Item 1", info = "First item in dropdown menu."),
+        ItemInnerDetails(parentID = 4, itemIDInner = 8, itemNameInner = "Navigator Item 1", info = "Item related to navigator."),
+        ItemInnerDetails(parentID = 4, itemIDInner = 9, itemNameInner = "Media Item 1", info = "Item for media player.")
     )
 }
 
