@@ -32,7 +32,6 @@ fun create2DList(): List<List<itemMainData>> {
     val mediaItems = allItems.filter { it.itemType == ItemType.MEDIA }
     val statesItems = allItems.filter { it.itemType == ItemType.STATES }
     val animationItems = allItems.filter { it.itemType == ItemType.ANIMATION }
-
     // Add the grouped lists to the 2D list
     groupedItems.add(layoutItems)
     groupedItems.add(uiItems)
@@ -41,9 +40,9 @@ fun create2DList(): List<List<itemMainData>> {
     groupedItems.add(mediaItems)
     groupedItems.add(statesItems)
     groupedItems.add(animationItems)
-
     return groupedItems
 }
+
 
 // Function to create ItemInnerDetails linked by parentID
 fun createItemInnerDetails(): List<ItemInnerDetails> {
@@ -134,6 +133,11 @@ fun createCodeSnippets(): List<CodeSnippets> {
         """.trimIndent()),
         CodeSnippets(parentID = 10, id = 10, fileName = "NavigationHostSnippet.kt", code = """
             fun setupNavigationHost() {
+                // Navigation host setup logic
+            }
+        """.trimIndent()),
+        CodeSnippets(parentID = 1, id = 11, fileName = "NavigationHostSnippet2.kt", code = """
+            fun setupNavigationHost2() {
                 // Navigation host setup logic
             }
         """.trimIndent())

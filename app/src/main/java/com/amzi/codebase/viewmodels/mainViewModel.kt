@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.codebase.dataClasses.ItemType
 import com.amzi.codebase.dataClasses.create2DList
+import com.amzi.codebase.dataClasses.createCodeSnippets
 import com.amzi.codebase.dataClasses.createItemInnerDetails
 import com.amzi.codebase.dataClasses.itemMainData
 import com.amzi.codebase.repository.myRepository
@@ -28,6 +29,7 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
 
     val allItems = create2DList()
     val allInnerItems = createItemInnerDetails()
+    val codeItems = createCodeSnippets()
 
     private val _layoutItems = MutableStateFlow<List<itemMainData>>(allItems.get(0))
     val layoutItems: StateFlow<List<itemMainData>> = _layoutItems.asStateFlow()
