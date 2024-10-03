@@ -57,9 +57,9 @@ fun MainScreen(code: MutableState<String>) {
             width = 1.5.dp,
             color = lightGrey,
             shape = RoundedCornerShape(8.dp)
-        ).padding(16.dp),
+        ).padding(8.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally)  {
+        horizontalAlignment = Alignment.Start)  {
         /*SyntaxHighlightedTextField(
             value = code,
             onValueChange = { newCode -> code = newCode }
@@ -67,7 +67,6 @@ fun MainScreen(code: MutableState<String>) {
         HighlightedCode(code.value)
     }
 }
-
 
 /*
 @Composable
@@ -175,8 +174,6 @@ fun SyntaxHighlightedTextField(
     }
 }
 
-
-
 @Composable
 fun AutocompleteSuggestionBox(
     suggestion: String,
@@ -198,16 +195,11 @@ fun AutocompleteSuggestionBox(
     }
 }
 
-
 fun getSuggestion(input: String): String? {
     // Return the first keyword that starts with the input text, case-insensitive
     Log.d("SUGGESSTION: ", input + "   " + combinedKeywords.firstOrNull { it.startsWith(input, ignoreCase = true) })
     return combinedKeywords.firstOrNull { it.startsWith(input, ignoreCase = true) }
 }
-
-
-
-
 
 class Highlighter(private val tokens: List<Token>) : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
@@ -343,7 +335,6 @@ fun tokenize(code: String): List<Token> {
     return tokens
 }
 
-
 val combinedKeywords = listOf(
     // Kotlin Keywords
     "as", "as?", "break", "class", "continue", "do", "else", "false", "for", "fun",
@@ -376,7 +367,6 @@ val combinedKeywords = listOf(
     "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
     "transient", "try", "void", "volatile", "while"
 )
-
 
 val javaKeywords = listOf(
     "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",

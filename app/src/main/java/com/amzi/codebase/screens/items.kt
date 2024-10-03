@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.amzi.codebase.R
 import com.amzi.codebase.dataClasses.itemMainData
+import com.amzi.codebase.mainComponent
 import com.amzi.codebase.ui.theme.CompactTypography
 import com.amzi.codebase.ui.theme.bluePrimary
 import com.amzi.codebase.ui.theme.grey
@@ -63,9 +64,37 @@ fun Items(navController: NavHostController, mainViewModel: mainViewModel) {
             ))
         Links(item.value)
         Tabs(item.value?.itemID,mainViewModel,selectedIndex,nestedItemId)
+        mainComponent(1)
+        FullScreenToggle()
         MainScreen(code)
 //        ContentInner(item.value,mainViewModel,nestedItemId)
     }
+}
+
+@Composable
+fun FullScreenToggle() {
+    Row(modifier = Modifier.padding(start = 12.dp, top = 16.dp, bottom = 0.dp),verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = "Code",
+
+            style = TextStyle(
+                fontFamily = CompactTypography.bodyMedium.fontFamily,
+                color = lightGrey,
+                fontSize = 14.sp,
+            )
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Image(modifier = Modifier
+            .height(30.dp)
+            .wrapContentWidth()
+            .clickable {
+                //open link ->1
+            },
+            painter = painterResource(R.drawable.ic_fullscreen),
+            contentDescription = "",
+            contentScale = ContentScale.Fit)
+    }
+
 }
 
 @Composable
