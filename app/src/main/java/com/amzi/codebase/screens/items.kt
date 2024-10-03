@@ -39,6 +39,7 @@ import com.amzi.codebase.ui.theme.bluePrimary
 import com.amzi.codebase.ui.theme.grey
 import com.amzi.codebase.ui.theme.lightGrey
 import com.amzi.codebase.ui.theme.paleWhite
+import com.amzi.codebase.utility.MainScreen
 import com.amzi.codebase.viewmodels.mainViewModel
 
 @Composable
@@ -46,6 +47,12 @@ fun Items(navController: NavHostController, mainViewModel: mainViewModel) {
     val item = mainViewModel.selectedInnerItem.collectAsState()
     val selectedIndex = remember { mutableStateOf(-1) }
     val nestedItemId = remember { mutableStateOf(-1) }
+    val code = remember { mutableStateOf("Click on any tab to view code and UI") }
+    if(nestedItemId.value != -1){
+        code.value = mainViewModel.codeItems.get(nestedItemId.value).code?:"Happy Learning"
+    }else{
+        code.value = "Click on any tab to view code and UI"
+    }
     Column {
         InnerHeader(item.value?.itemDisplayName)
         Text(text = item.value?.info?:"Happy learning", modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
@@ -56,8 +63,8 @@ fun Items(navController: NavHostController, mainViewModel: mainViewModel) {
             ))
         Links(item.value)
         Tabs(item.value?.itemID,mainViewModel,selectedIndex,nestedItemId)
-        ContentInner(item.value,mainViewModel,nestedItemId)
-
+        MainScreen(code)
+//        ContentInner(item.value,mainViewModel,nestedItemId)
     }
 }
 
@@ -81,9 +88,17 @@ fun ContentInner(
         horizontalAlignment = Alignment.CenterHorizontally) {
 //        Text(text = mainViewModel.selectedInnerItem.value)
         if(nestedItemId.value != -1){
-            Text(text = mainViewModel.codeItems.get(nestedItemId.value).code?:"Happy learning")
+            Text(text = mainViewModel.codeItems.get(nestedItemId.value).code?:"Happy learning",style = TextStyle(
+                fontFamily = CompactTypography.bodyMedium.fontFamily,
+                color = grey,
+                fontSize = 15.sp,
+            ))
         }else{
-            Text(text = "Click on any tab to view code and UI")
+            Text(text = "Click on any tab to view code and UI",style = TextStyle(
+                    fontFamily = CompactTypography.bodyMedium.fontFamily,
+                color = grey,
+                fontSize = 15.sp,
+            ))
         }
     }
 }

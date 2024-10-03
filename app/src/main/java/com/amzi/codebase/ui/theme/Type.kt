@@ -37,6 +37,11 @@ val Typography = Typography(
     */
 )
 
+val srcpro = FontFamily(
+    Font(R.font.srcprom,
+        FontWeight.W400)
+)
+
 val kanit = FontFamily(
     Font(R.font.kanitregular,
         FontWeight.SemiBold)

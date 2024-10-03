@@ -46,7 +46,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
@@ -122,4 +122,11 @@ dependencies {
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
+    arguments {
+        arg("dagger.gradle.incremental", "true")
+        arg("kapt.kotlin.generated", "$buildDir/generated/source/kaptKotlin")
+    }
+    javacOptions {
+        option("-Xadd-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+    }
 }
