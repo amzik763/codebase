@@ -22,7 +22,7 @@ import com.amzi.codebase.ui.theme.paleWhite
 
 
 @Composable
-fun mainComponent(id:Int){
+fun mainComponent(id: MutableState<Int>){
 
     Column(modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 24.dp, bottom = 12.dp).fillMaxWidth()
         .background(
@@ -36,11 +36,30 @@ fun mainComponent(id:Int){
         ).padding(8.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
-        when(id){
+        when(id.value){
+            -1 -> {
+                Nothing()
+            }
             1 ->{
                 CheckboxSimple()
             }
+            2 ->{
+                CheckboxCustom()
+            }
         }
+    }
+}
+
+
+@Composable
+fun Nothing(){
+
+    // Remember the checked state
+    val checkedState: MutableState<Boolean> = remember { mutableStateOf(false) }
+
+    Row(verticalAlignment = Alignment.CenterVertically
+    ){
+        Text(text = "Generating...")
     }
 
 }
@@ -52,7 +71,8 @@ fun CheckboxSimple(){
     // Remember the checked state
     val checkedState: MutableState<Boolean> = remember { mutableStateOf(false) }
 
-    Row(verticalAlignment = Alignment.CenterVertically ){
+    Row(verticalAlignment = Alignment.CenterVertically
+    ){
         // Checkbox with a state
         Checkbox(
             checked = checkedState.value,
@@ -60,6 +80,26 @@ fun CheckboxSimple(){
         )
         // Displaying the current state
         Text(text = if (checkedState.value) "Checked" else "Unchecked")
+    }
+
+}
+
+
+@Composable
+fun CheckboxCustom(){
+
+    // Remember the checked state
+    val checkedState: MutableState<Boolean> = remember { mutableStateOf(false) }
+
+    Row(verticalAlignment = Alignment.CenterVertically
+    ){
+        // Checkbox with a state
+        Checkbox(
+            checked = checkedState.value,
+            onCheckedChange = { checkedState.value = it }
+        )
+        // Displaying the current state
+        Text(text = if (checkedState.value) "Got it" else "Not got it")
     }
 
 }

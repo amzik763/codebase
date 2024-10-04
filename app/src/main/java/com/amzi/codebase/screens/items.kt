@@ -64,7 +64,7 @@ fun Items(navController: NavHostController, mainViewModel: mainViewModel) {
             ))
         Links(item.value)
         Tabs(item.value?.itemID,mainViewModel,selectedIndex,nestedItemId)
-        mainComponent(1)
+        mainComponent(nestedItemId)
         FullScreenToggle()
         MainScreen(code)
 //        ContentInner(item.value,mainViewModel,nestedItemId)
