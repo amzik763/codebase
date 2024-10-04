@@ -53,15 +53,12 @@ fun mainComponent(id: MutableState<Int>){
 
 @Composable
 fun Nothing(){
-
     // Remember the checked state
     val checkedState: MutableState<Boolean> = remember { mutableStateOf(false) }
-
     Row(verticalAlignment = Alignment.CenterVertically
     ){
         Text(text = "Generating...")
     }
-
 }
 
 

@@ -64,6 +64,16 @@ fun Items(navController: NavHostController, mainViewModel: mainViewModel) {
             ))
         Links(item.value)
         Tabs(item.value?.itemID,mainViewModel,selectedIndex,nestedItemId)
+        if(nestedItemId.value != -1)
+            Text(modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                text = mainViewModel.allInnerItems.get(nestedItemId.value).info?:"Happy Learning",
+
+                style = TextStyle(
+                    fontFamily = CompactTypography.bodyMedium.fontFamily,
+                    color = grey,
+                    fontSize = 14.sp,
+                )
+            )
         mainComponent(nestedItemId)
         FullScreenToggle()
         MainScreen(code)
@@ -84,7 +94,7 @@ fun FullScreenToggle() {
             )
         )
         Spacer(modifier = Modifier.width(4.dp))
-        Image(modifier = Modifier
+        Image(modifier = Modifier.padding(top = 2.dp)
             .height(30.dp)
             .wrapContentWidth()
             .clickable {

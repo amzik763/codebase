@@ -68,7 +68,7 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
     }
 
     fun getItems(type: ItemType): List<itemMainData> {
-        return when (type) {
+        return  when (type) {
             ItemType.LAYOUT -> _layoutItems.value
             ItemType.INPUTS -> _inputItems.value
             ItemType.STATES -> _statesItems.value
@@ -79,6 +79,31 @@ class mainViewModel @Inject constructor(private val repository: myRepository) : 
             ItemType.OTHER -> TODO()
             ItemType.ANIMATION -> TODO()
             ItemType.NAVIGATION -> TODO()
+            ItemType.DRAWING -> TODO()
+            ItemType.GESTURES -> TODO()
+            ItemType.PERMISSIONS -> TODO()
+            ItemType.NETWORKING -> TODO()
+            ItemType.THEMING -> TODO()
+            ItemType.PERFORMANCE -> TODO()
+            ItemType.TESTING -> TODO()
+            ItemType.ACCESSIBILITY -> TODO()
+            ItemType.DATABASE -> TODO()
+            ItemType.BACKGROUND_TASKS -> TODO()
+            ItemType.SECURITY -> TODO()
+            ItemType.CACHING -> TODO()
+            ItemType.CLOUD -> TODO()
+            ItemType.LOCALIZATION -> TODO()
+            ItemType.ERROR_HANDLING -> TODO()
+            ItemType.INTEGRATIONS -> TODO()
+            ItemType.FILES -> TODO()
+            ItemType.NOTIFICATIONS -> TODO()
+            ItemType.SENSORS -> TODO()
+            ItemType.PAYMENTS -> TODO()
+            ItemType.CUSTOM_VIEWS -> TODO()
+            ItemType.WEB -> TODO()
+            ItemType.DEPENDENCY_INJECTION -> TODO()
+            ItemType.MULTI_WINDOW -> TODO()
+            ItemType.SCHEDULED_TASKS -> TODO()
         }
     }
 

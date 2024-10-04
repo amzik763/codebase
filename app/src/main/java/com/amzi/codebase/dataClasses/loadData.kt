@@ -2,10 +2,18 @@ package com.amzi.codebase.dataClasses
 // Function to create ItemMainData
 fun createItemMainData(): List<itemMainData> {
     return listOf(
-        itemMainData(itemID = 0, itemDisplayName = "Row Layout", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A layout that arranges items in a horizontal sequence."),
-        itemMainData(itemID = 1, itemDisplayName = "Column Layout", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a vertical sequence."),
-        itemMainData(itemID = 2, itemDisplayName = "Grid Layout", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.HARD, info = "A layout that arranges items in a grid format."),
-        itemMainData(itemID = 3, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
+        itemMainData(itemID = 0, itemDisplayName = "Row", itemGroup = GroupType.ROW, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a horizontal sequence, placing each child next to the previous one."),
+        itemMainData(itemID = 1, itemDisplayName = "Column", itemGroup = GroupType.COLUMN, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a vertical sequence, stacking each child on top of the previous one."),
+        itemMainData(itemID = 2, itemDisplayName = "Grid", itemGroup = GroupType.GRID, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that arranges items in a grid format, displaying rows and columns of items."),
+        itemMainData(itemID = 3, itemDisplayName = "Box", itemGroup = GroupType.BOX, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that allows composables to overlap on top of each other."),
+        itemMainData(itemID = 4, itemDisplayName = "LazyColumn", itemGroup = GroupType.VERTICALLIST, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A vertically scrolling list that lazily composes and displays only visible items."),
+        itemMainData(itemID = 5, itemDisplayName = "LazyRow", itemGroup = GroupType.HORIZONTALLIST, itemType = ItemType.LAYOUT, itemLevel = Level.MEDIUM, info = "A horizontally scrolling list that lazily composes and displays only visible items."),
+        itemMainData(itemID = 6, itemDisplayName = "Scrollable", itemGroup = GroupType.SCROLLABLE, itemType = ItemType.LAYOUT, itemLevel = Level.EASY, info = "A layout that allows its content to be scrollable either vertically or horizontally."),
+        itemMainData(itemID = 7, itemDisplayName = "TextField", itemGroup = GroupType.TEXTFIELD, itemType = ItemType.INPUTS, itemLevel = Level.EASY, info = "A text input field that allows users to type and enter text."),
+        itemMainData(itemID = 8, itemDisplayName = "OutlinedTextField", itemGroup = GroupType.OUTLINEDTEXTFIELD, itemType = ItemType.INPUTS, itemLevel = Level.EASY, info = "A text input field with an outlined border to enhance visibility."),
+        itemMainData(itemID = 9, itemDisplayName = "BasicTextField", itemGroup = GroupType.BASICTEXTFIELD, itemType = ItemType.INPUTS, itemLevel = Level.EASY, info = "A customizable text input field with basic text entry functionality.")
+
+        /*itemMainData(itemID = 3, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
         itemMainData(itemID = 4, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, info = "A menu that drops down to show options."),
         itemMainData(itemID = 5, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, info = "A component that navigates between screens."),
         itemMainData(itemID = 6, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, info = "A player for audio and video media."),
@@ -14,7 +22,7 @@ fun createItemMainData(): List<itemMainData> {
         itemMainData(itemID = 9, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
         itemMainData(itemID = 10, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.STATES, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
         itemMainData(itemID = 11, itemDisplayName = "State Management", itemGroup = GroupType.NAVHOST, itemType = ItemType.ANIMATION, itemLevel = Level.MEDIUM, info = "Adding animations to your UI."),
-        itemMainData(itemID = 12, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, info = "A host for managing navigation in your app.")
+        itemMainData(itemID = 12, itemDisplayName = "Navigation Host", itemGroup = GroupType.NAVHOST, itemType = ItemType.NAVIGATION, itemLevel = Level.HARD, info = "A host for managing navigation in your app.")*/
     )
 }
 
@@ -26,20 +34,26 @@ fun create2DList(): List<List<itemMainData>> {
 
     // Grouping based on ItemType
     val layoutItems = allItems.filter { it.itemType == ItemType.LAYOUT }
-    val uiItems = allItems.filter { it.itemType == ItemType.UI }
-    val menuItems = allItems.filter { it.itemType == ItemType.MENU }
-    val navigationItems = allItems.filter { it.itemType == ItemType.NAVIGATION }
-    val mediaItems = allItems.filter { it.itemType == ItemType.MEDIA }
+    val inputItems = allItems.filter { it.itemType == ItemType.INPUTS }
     val statesItems = allItems.filter { it.itemType == ItemType.STATES }
+    val uiItems = allItems.filter { it.itemType == ItemType.UI }
+    val mediaItems = allItems.filter { it.itemType == ItemType.MEDIA }
+    val displayItems = allItems.filter { it.itemType == ItemType.DISPLAY }
+    val menuItems = allItems.filter { it.itemType == ItemType.MENU }
+    val otherItems = allItems.filter { it.itemType == ItemType.OTHER }
     val animationItems = allItems.filter { it.itemType == ItemType.ANIMATION }
+    val navigationItems = allItems.filter { it.itemType == ItemType.NAVIGATION }
     // Add the grouped lists to the 2D list
     groupedItems.add(layoutItems)
-    groupedItems.add(uiItems)
-    groupedItems.add(menuItems)
-    groupedItems.add(navigationItems)
-    groupedItems.add(mediaItems)
+    groupedItems.add(inputItems)
     groupedItems.add(statesItems)
+    groupedItems.add(uiItems)
+    groupedItems.add(mediaItems)
+    groupedItems.add(displayItems)
+    groupedItems.add(menuItems)
+    groupedItems.add(otherItems)
     groupedItems.add(animationItems)
+    groupedItems.add(navigationItems)
     return groupedItems
 }
 
