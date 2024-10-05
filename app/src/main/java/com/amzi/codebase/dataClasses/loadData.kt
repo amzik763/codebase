@@ -13,7 +13,7 @@ fun createItemMainData(): List<itemMainData> {
         itemMainData(itemID = 8, itemDisplayName = "OutlinedTextField", itemGroup = GroupType.OUTLINEDTEXTFIELD, itemType = ItemType.INPUTS, itemLevel = Level.EASY, info = "A text input field with an outlined border to enhance visibility."),
         itemMainData(itemID = 9, itemDisplayName = "BasicTextField", itemGroup = GroupType.BASICTEXTFIELD, itemType = ItemType.INPUTS, itemLevel = Level.EASY, info = "A customizable text input field with basic text entry functionality.")
 
-        /*itemMainData(itemID = 3, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
+      /*itemMainData(itemID = 3, itemDisplayName = "Alert Dialog", itemGroup = GroupType.ALERTDIAOLOG, itemType = ItemType.UI, itemLevel = Level.MEDIUM, info = "A dialog that alerts the user."),
         itemMainData(itemID = 4, itemDisplayName = "Dropdown Menu", itemGroup = GroupType.DROPDOWNMENU, itemType = ItemType.MENU, itemLevel = Level.EASY, info = "A menu that drops down to show options."),
         itemMainData(itemID = 5, itemDisplayName = "Navigator", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.NAVIGATION, itemLevel = Level.MEDIUM, info = "A component that navigates between screens."),
         itemMainData(itemID = 6, itemDisplayName = "Media Player", itemGroup = GroupType.NAVIGATOR, itemType = ItemType.MEDIA, itemLevel = Level.HARD, info = "A player for audio and video media."),
@@ -57,34 +57,46 @@ fun create2DList(): List<List<itemMainData>> {
     return groupedItems
 }
 
-
 // Function to create ItemInnerDetails linked by parentID
 fun createItemInnerDetails(): List<ItemInnerDetails> {
     return listOf(
-        ItemInnerDetails(parentID = 0, itemIDInner = 0, itemNameInner = "Row Item 1", info = "First item in row layout."),
-        ItemInnerDetails(parentID = 0, itemIDInner = 1, itemNameInner = "Row Item 2", info = "Second item in row layout."),
-        ItemInnerDetails(parentID = 1, itemIDInner = 2, itemNameInner = "Column Item 1", info = "First item in column layout."),
-        ItemInnerDetails(parentID = 1, itemIDInner = 3, itemNameInner = "Column Item 2", info = "Second item in column layout."),
-        ItemInnerDetails(parentID = 2, itemIDInner = 4, itemNameInner = "Grid Item 1", info = "First item in grid layout."),
-        ItemInnerDetails(parentID = 2, itemIDInner = 5, itemNameInner = "Grid Item 2", info = "Second item in grid layout."),
-        ItemInnerDetails(parentID = 3, itemIDInner = 6, itemNameInner = "Dialog Item 1", info = "Item related to alert dialog."),
-        ItemInnerDetails(parentID = 4, itemIDInner = 7, itemNameInner = "Dropdown Item 1", info = "First item in dropdown menu."),
-        ItemInnerDetails(parentID = 4, itemIDInner = 8, itemNameInner = "Navigator Item 1", info = "Item related to navigator."),
-        ItemInnerDetails(parentID = 4, itemIDInner = 9, itemNameInner = "Media Item 1", info = "Item for media player.")
+        ItemInnerDetails(parentID = 0, itemIDInner = 0, itemNameInner = "1", info = "First item in row layout."),
+        ItemInnerDetails(parentID = 0, itemIDInner = 1, itemNameInner = "2 ", info = "Second item in row layout."),
+        ItemInnerDetails(parentID = 0, itemIDInner = 2, itemNameInner = "3", info = "Third item in row layout."),
+
+        ItemInnerDetails(parentID = 1, itemIDInner = 3, itemNameInner = "1", info = "First item in column layout."),
+        ItemInnerDetails(parentID = 2, itemIDInner = 4, itemNameInner = "2", info = "Second item in column layout."),
+
+        ItemInnerDetails(parentID = 7, itemIDInner = 5, itemNameInner = "1", info = "Text Field tutorial."),
+        ItemInnerDetails(parentID = 7, itemIDInner = 6, itemNameInner = "2", info = "Advanced Text Field Tutorial."),
+        ItemInnerDetails(parentID = 8, itemIDInner = 7, itemNameInner = "1", info = "Outlined Text Field tutorial."),
+
+        ItemInnerDetails(parentID = 4, itemIDInner = 8, itemNameInner = "2", info = "Item related to navigator."),
+        ItemInnerDetails(parentID = 4, itemIDInner = 9, itemNameInner = "1", info = "Item for media player.")
     )
 }
 
 // Function to create CodeSnippets linked by parentID
 fun createCodeSnippets(): List<CodeSnippets> {
     return listOf(
-        CodeSnippets(parentID = 1, id = 1, fileName = "RowSnippet1.kt", code = """
-            fun createRow() {
-                // This function creates a row layout
-                val rowLayout = Row {
-                    Text("Row Item 1")
-                    Text("Row Item 2")
-                }
+        CodeSnippets(parentID = 1, id = 1, fileName = "RowSnippet1.kt", code =
+        """
+        @Composable
+        fun myRow() {
+            // This function creates a row layout
+            Row {
+                 
             }
+        }
+        
+        // Let us give it background color 
+        @Composable
+        fun myRow() {
+            // This function creates a row layout
+            Row {
+                 
+            }
+        }
         """.trimIndent()),
         CodeSnippets(parentID = 2, id = 2, fileName = "ColumnSnippet1.kt", code = """
             fun createColumn() {

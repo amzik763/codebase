@@ -29,12 +29,21 @@ data class ItemInnerDetailsFromServer(
     val isPremium:Boolean?=true,
 )
 
+//update class to add dummy text and list of codesnippets
 data class CodeSnippets(
     val id:Int?=0,
     val fileName:String?="",
     val code:String?="",
     val parentID:Int?=0
-    )
+)
+
+data class CodeSnippetsV2(
+    val id:Int?=0,
+    val fileName:String?="",
+    val code:String?="",
+    val info:String?="",
+    val parentID:Int?=0
+)
 
 data class Reviews(
     val parentID: Int? = 0,
@@ -55,7 +64,6 @@ enum class GroupType(val value:String){
     TEXTFIELD("Text Field"),
     OUTLINEDTEXTFIELD("Outlined Text Field"),
     BASICTEXTFIELD("Basic Text Field"),
-
 
     ALERTDIAOLOG("Alert Dialog"),
     DROPDOWNMENU("Dropdown Menu"),
